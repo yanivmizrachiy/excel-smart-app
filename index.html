@@ -1,0 +1,26 @@
+<!doctype html><html lang=""he"" dir=""rtl""><head>
+  <title>Excel Smart App</title>
+  <meta charset=""utf-8""/><meta name=""viewport"" content=""width=device-width,initial-scale=1""/>
+<script src=""https://cdn.tailwindcss.com""></script>
+<link rel=""stylesheet"" href=""common/branding.css""/>
+<script>tailwind.config={theme:{extend:{colors:{brand:'#00b3ff',brand2:'#7c3aed'}}}}</script>
+<script src=""https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"" defer></script>
+</head><body class=""app-bg""><div class=""maxw p-6"">
+  <header class=""mb-6 flex items-center justify-between"">
+    <h1 class=""text-3xl md:text-4xl font-bold title-shine"">Excel Smart App</h1>
+    <nav class=""flex gap-2 text-sm""><a class=""btn"" href=""https://yanivmizrachiy.github.io/"" target=""_blank"">דף GitHub</a></nav>
+  </header>
+  <main class=""glass p-5 md:p-8""><div class="space-y-4">
+  <input type="file" id="file" class="input" accept=".xlsx,.xls,.csv">
+  <div id="out" class="overflow-auto"></div>
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+  <script>
+    const out=document.getElementById('out'); document.getElementById('file').onchange=e=>{
+      const f=e.target.files[0]; if(!f) return; const r=new FileReader();
+      r.onload=()=>{const wb=XLSX.read(new Uint8Array(r.result),{type:'array'}); const ws=wb.Sheets[wb.SheetNames[0]]; out.innerHTML='<div class="glass p-3">'+XLSX.utils.sheet_to_html(ws)+'</div>';};
+      r.readAsArrayBuffer(f);
+    };
+  </script>
+</div></main>
+  <footer class=""mt-6 text-xs opacity-70"">© yanivmizrachiy — RTL • Glass • Tailwind CDN</footer>
+</div></body></html>
